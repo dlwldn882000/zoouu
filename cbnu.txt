@@ -1,0 +1,2 @@
+#include(void)
+int a;
