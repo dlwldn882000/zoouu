@@ -1,0 +1,61 @@
+int piezo = 3;
+
+int sw = 8;
+
+int tones = 261;
+
+int touch = 13;
+
+int led = A0;  
+
+ 
+
+void setup(){
+
+  pinMode(touch,INPUT);
+
+  pinMode(piezo, OUTPUT);
+
+  pinMode(sw, INPUT_PULLUP);
+
+  pinMode(led,OUTPUT);  // led를 출력모드로 설정
+
+  Serial.begin(9600);
+
+}
+
+void loop(){
+
+  int val= analogRead(A1);  //  A1 아날로그 값을 읽어서 val에 저장
+
+  Serial.println(val);   // val 값을 출력
+
+  if(val>130)  // 아날로그 값이 중간 이하라면 LED를 켜라
+
+ {
+
+  digitalWrite(led,HIGH);
+
+ }
+
+ else // 아날로그 값이 중간 이상이라면 LED를 꺼라
+
+ {
+
+  digitalWrite(led,LOW);
+
+ }
+
+ delay(100); 
+
+ if(digitalRead(sw)==LOW && digitalRead(touch)==LOW){
+
+    tone(piezo, tones);
+
+    delay(500);
+
+ }
+
+ noTone(piezo);
+
+}
